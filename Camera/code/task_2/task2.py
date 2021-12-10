@@ -12,8 +12,8 @@ objpoints = [] # 3d point in real world space
 imgpointsL = [] # 2d points in image plane.
 imgpointsR = [] # 2d points in image plane.
 
-imageL = glob.glob('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_2/left_0.png')
-imageR = glob.glob('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_2/right_0.png')
+imageL = glob.glob('.../images/task_2/left_0.png')
+imageR = glob.glob('.../images/task_2/right_0.png')
 
 for fname in imageL:
     imgL = cv.imread(fname)
@@ -43,12 +43,12 @@ if retR == True:
             #cv.waitKey(0)
 #cv.destroyAllWindows()
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_1/Left_intrinsics.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_1/Left_intrinsics.xml',cv.FileStorage_READ)
 mtxL = f.getNode("LeftIntrinsics").mat()
 distL = f.getNode("DistortionCoefficients").mat()
 f.release()
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_1/Right_intrinsics.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_1/Right_intrinsics.xml',cv.FileStorage_READ)
 mtxR = f.getNode("RightIntrinsics").mat()
 distR = f.getNode("RightDistortionCoefficients").mat()
 f.release()
@@ -59,7 +59,7 @@ flags |= cv.CALIB_FIX_INTRINSIC
 stereo_criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 100, 0.00001)
 ret,mL,dL,mR,dR,R,T,E,F = cv.stereoCalibrate(objpoints, imgpointsL, imgpointsR, mtxL, distL, mtxR, distR, grayL.shape[::-1], criteria=stereo_criteria, flags=flags)
 
-f = cv.FileStorage("C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_2/1stereoCalibration_parameters.xml", cv.FileStorage_WRITE)
+f = cv.FileStorage(".../output/task_2/1stereoCalibration_parameters.xml", cv.FileStorage_WRITE)
 f.write("LeftIntrinsics",mL)
 f.write('LeftDistortionCoefficients',dL)
 f.write("RightIntrinsics",mR)
@@ -84,7 +84,7 @@ RL = np.array([[1, 0, 0],
 
 R1, R2, P1, P2, Q, validPixROI1, validPixROI2 = cv.stereoRectify(mL, dL, mR, dR, grayL.shape[::-1], R, T)
 
-f = cv.FileStorage("C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_2/stereoRectification_parameters.xml", cv.FileStorage_WRITE)
+f = cv.FileStorage(".../output/task_2/stereoRectification_parameters.xml", cv.FileStorage_WRITE)
 f.write("R1",R1)
 f.write('R2',R2)
 f.write("P1",P1)
@@ -95,7 +95,7 @@ f.release()
 mapLx, mapLy = cv.initUndistortRectifyMap(mtxL, distL, R1, P1, grayL.shape[::-1], cv.CV_32FC1)
 #print(mapLx)
 #plt.imshow(mapLx)
-img = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_2/left_1.png')
+img = cv.imread('.../images/task_2/left_1.png')
 h,  w = img.shape[:2]
 #print(h, w)
 
