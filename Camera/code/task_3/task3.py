@@ -7,7 +7,7 @@ from skimage.feature import peak_local_max
 from skimage import data, img_as_float
 
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_2/1stereoRectification_parameters.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_2/1stereoRectification_parameters.xml',cv.FileStorage_READ)
 R1 = f.getNode("R1").mat()
 P1 = f.getNode("P1").mat()
 R2 = f.getNode("R2").mat()
@@ -15,18 +15,18 @@ P2 = f.getNode("P2").mat()
 Q = f.getNode("Q").mat()
 f.release()
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/poroject_2a/output/task_1/Left_intrinsics.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_1/Left_intrinsics.xml',cv.FileStorage_READ)
 mtxL = f.getNode("LeftIntrinsics").mat()
 distL = f.getNode("DistortionCoefficients").mat()
 f.release()
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_1/Right_intrinsics.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_1/Right_intrinsics.xml',cv.FileStorage_READ)
 mtxR = f.getNode("RightIntrinsics").mat()
 distR = f.getNode("DistortionCoefficients").mat()
 f.release()
 
 
-imgL = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_3_and_4/left_0.png')
+imgL = cv.imread('.../images/task_3_and_4/left_0.png')
 imgL = cv.cvtColor(imgL, cv.COLOR_BGR2GRAY)
 h,  w = imgL.shape[:2]
 #newcameramtx, roi = cv.getOptimalNewCameraMatrix(mtxL, distL, (w,h), 1, (w,h))
@@ -40,7 +40,7 @@ print(Ldst.shape[:2])
 #cv.waitKey(0)
 #cv.destroyAllWindows()
 
-imgR = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_3_and_4/right_0.png')
+imgR = cv.imread('.../images/task_3_and_4/right_0.png')
 imgR = cv.cvtColor(imgR, cv.COLOR_BGR2GRAY)
 h,  w = imgR.shape[:2]
 #print(h,w)
