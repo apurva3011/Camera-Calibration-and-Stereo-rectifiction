@@ -10,7 +10,7 @@ objpL[:,:2] = np.mgrid[0:9,0:6].T.reshape(-1,2)
 objpointsL = [] # 3d point in real world space
 imgpointsL = [] # 2d points in image plane.
 
-imagesL = glob.glob('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_1/left_*.png')
+imagesL = glob.glob('.../images/task_1/left_*.png')
 for fname in imagesL:
     imgL = cv.imread(fname)
     grayL = cv.cvtColor(imgL, cv.COLOR_BGR2GRAY)
@@ -32,7 +32,7 @@ objpR[:,:2] = np.mgrid[0:9,0:6].T.reshape(-1,2)
 objpointsR = [] # 3d point in real world space
 imgpointsR = [] # 2d points in image plane.
 
-imagesR = glob.glob('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_1/right_*.png')
+imagesR = glob.glob('.../images/task_1/right_*.png')
 for fname in imagesR:
     imgR = cv.imread(fname)
     grayR = cv.cvtColor(imgR, cv.COLOR_BGR2GRAY)
@@ -48,7 +48,7 @@ for fname in imagesR:
 #cv.destroyAllWindows()
 retR, mtxR, distR, rvecsR, tvecsR = cv.calibrateCamera(objpointsR, imgpointsR, grayR.shape[::-1], None, None)
 
-imgL = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_1/left_2.png')
+imgL = cv.imread('.../images/task_1/left_2.png')
 h,  w = imgL.shape[:2]
 newcameramtxL, roiL = cv.getOptimalNewCameraMatrix(mtxL, distL, (w,h), 1, (w,h))
 mapxL, mapyL = cv.initUndistortRectifyMap(mtxL, distL, None, newcameramtxL, (w,h), 5)
@@ -58,7 +58,7 @@ dstL = dstL[y:y+h, x:x+w]
 cv.imwrite('calib1.png', dstL)
 print(dstL.shape[:2])
 
-imgR = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_1/right_2.png')
+imgR = cv.imread('.../images/task_1/right_2.png')
 h,  w = imgR.shape[:2]
 newcameramtxR, roiR = cv.getOptimalNewCameraMatrix(mtxR, distR, (w,h), 1, (w,h))
 mapxR, mapyR = cv.initUndistortRectifyMap(mtxR, distR, None, newcameramtxR, (w,h), 5)
@@ -68,12 +68,12 @@ dstR = dstR[y:y+h, x:x+w]
 cv.imwrite('calib2.png', dstR)
 print(dstR.shape[:2])
 
-f = cv.FileStorage("C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_1/Left_intrinsics.xml", cv.FileStorage_WRITE)
+f = cv.FileStorage(".../output/task_1/Left_intrinsics.xml", cv.FileStorage_WRITE)
 f.write("LeftIntrinsics",mtxL)
 f.write('LeftDistortionCoefficients',distL)
 f.release()
 
-f = cv.FileStorage("C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_1/Right_intrinsics.xml", cv.FileStorage_WRITE)
+f = cv.FileStorage(".../output/task_1/Right_intrinsics.xml", cv.FileStorage_WRITE)
 f.write("RightIntrinsics",mtxL)
 f.write('RightDistortionCoefficients',distL)
 f.release()
