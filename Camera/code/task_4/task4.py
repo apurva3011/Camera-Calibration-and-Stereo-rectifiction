@@ -3,27 +3,27 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt 
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_1/Left_intrinsics.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_1/Left_intrinsics.xml',cv.FileStorage_READ)
 mtxL = f.getNode("LeftIntrinsics").mat()
 distL = f.getNode("DistortionCoefficients").mat()
 f.release()
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_1/Right_intrinsics.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_1/Right_intrinsics.xml',cv.FileStorage_READ)
 mtxR = f.getNode("RightIntrinsics").mat()
 distR = f.getNode("RightDistortionCoefficients").mat()
 f.release()
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_2/1stereoCalibration_parameters.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_2/1stereoCalibration_parameters.xml',cv.FileStorage_READ)
 mL = f.getNode("LeftIntrinsics").mat()
 dL = f.getNode("LeftDistortionCoefficients").mat()
 f.release()
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_2/1stereoCalibration_parameters.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_2/1stereoCalibration_parameters.xml',cv.FileStorage_READ)
 mR = f.getNode("RightIntrinsics").mat()
 dR = f.getNode("RightDistortionCoefficients").mat()
 f.release()
 
-f = cv.FileStorage('C:/Users/Apurva/Documents/ras/cse598/project_2a/output/task_2/1stereoRectification_parameters.xml',cv.FileStorage_READ)
+f = cv.FileStorage('.../output/task_2/1stereoRectification_parameters.xml',cv.FileStorage_READ)
 R1 = f.getNode("R1").mat()
 P1 = f.getNode("P1").mat()
 R2 = f.getNode("R2").mat()
@@ -31,13 +31,13 @@ P2 = f.getNode("P2").mat()
 Q = f.getNode("Q").mat()
 f.release()
 
-imgL = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_3_and_4/left_8.png')
+imgL = cv.imread('.../images/task_3_and_4/left_8.png')
 imgL = cv.cvtColor(imgL, cv.COLOR_BGR2GRAY)
 #print(imgL.shape[::-1])
 mapLx, mapLy = cv.initUndistortRectifyMap(mtxL, distL, R1, P1, imgL.shape[::-1], cv.CV_32FC1)
 #print(mapLx)
 #plt.imshow(mapLx)
-imgL = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_3_and_4/left_8.png')
+imgL = cv.imread('.../images/task_3_and_4/left_8.png')
 hL,  wL = imgL.shape[:2]
 #print(h, w)
 
@@ -52,14 +52,14 @@ cv.waitKey(0)
 cv.destroyAllWindows()
 print(dstL.shape[:2])
 
-imgR = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_3_and_4/right_8.png')
+imgR = cv.imread('.../images/task_3_and_4/right_8.png')
 imgR = cv.cvtColor(imgR, cv.COLOR_BGR2GRAY)
 print(imgR.shape[::-1])
 newcameramtxR, roiR = cv.getOptimalNewCameraMatrix(mR, dR, imgR.shape[::-1], 1, imgR.shape[::-1])
 mapRx, mapRy = cv.initUndistortRectifyMap(mtxR, distR, R2, P2, imgR.shape[::-1], cv.CV_32FC1)
 #print(mapLx)
 #plt.imshow(mapLx)
-imgR = cv.imread('C:/Users/Apurva/Documents/ras/cse598/project_2a/images/task_3_and_4/right_8.png')
+imgR = cv.imread('.../images/task_3_and_4/right_8.png')
 hR,  wR = imgR.shape[:2]
 #print(h, w)
 
